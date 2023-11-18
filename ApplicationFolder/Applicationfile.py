@@ -1,13 +1,43 @@
 class Account:
-    def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance):
+    def __init__(self):
+        self._accountNumber = None
+        self._accountHolderName = None
+        self._rateOfInterest = None
+        self._currentBalance = None
+    
+    #getters
+    def getAccountNumber(self):
+        return self._accountNumber
+    def getAccountHolderName(self):
+        return self._accountHolderName
+    def getRateOfInterest(self):
+        return self._rateOfInterest
+    def getCurrentBalance(self):
+        return self._currentBalance
+    #setters
+    def setAccountNumber(self, accountNumber):
         self._accountNumber = accountNumber
+    def setAccountHolderName(self, accountHolderName):
         self._accountHolderName = accountHolderName
+    def setRateOfInterest(self, rateOfInterest):
         self._rateOfInterest = rateOfInterest
+    def setCurrentBalance(self, currentBalance):
         self._currentBalance = currentBalance
+
+    def deposit():
+        pass
+
+    def withdraw():
+        pass
 
 class Bank:
     def __init__(self, bankName):
         self._bankName = bankName
+    
+    def openAccount():
+        pass
+    def searchAccount():
+        pass
 
 class Application:
     def showMainMenu():
@@ -21,7 +51,7 @@ class Application:
             try:
                 choice = int(input(menuMessage))
             except ValueError:
-                print("Try again")
+                print("Invalid selection, try again.")
                 choice = int(input(menuMessage))
             if choice == 1:
                 pass
@@ -44,7 +74,7 @@ class Application:
             try:
                 choice = int(input(menuMessage))
             except ValueError:
-                print("Try again")
+                print("Invalid selection, try again.")
                 choice = int(input(menuMessage))
             if choice == 1:
                 pass
@@ -65,7 +95,12 @@ class Application:
 
 
 class SavingsAccount(Account):
-    pass
+    def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance, minimumBalance):
+        super().__init__(accountNumber, accountHolderName, rateOfInterest, currentBalance)
+        self._minimumBalance = minimumBalance
 
 class ChequingAccount(Account):
-    pass
+    def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance, overdraftLimit):
+        super().__init__(accountNumber, accountHolderName, rateOfInterest, currentBalance)
+        self._overdraftLimit = overdraftLimit
+        
