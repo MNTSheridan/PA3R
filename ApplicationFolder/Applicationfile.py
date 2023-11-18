@@ -196,7 +196,7 @@ class Application:
                 print("Invalid selection, try again.")
                 choice = int(input(menuMessage))
             if choice == 1:
-                print(f"Your balance: {account.getCurrentBalance()}")
+                print(f"Your balance: ${account.getCurrentBalance()}")
             elif choice == 2:
                 amount = input("How much do you want to deposit?\n")
                 account.deposit(amount)
@@ -222,6 +222,10 @@ class SavingsAccount(Account):
         super().__init__(accountNumber, accountHolderName, rateOfInterest, currentBalance)
         self._minimumBalance = minimumBalance
 
+    def getMinimumBalance(self):
+        return self._minimumBalance
+    def setMinimumBalance(self, min):
+        self._minimumBalance = min
 
     def withdraw(self, amount):
         try:
@@ -244,8 +248,11 @@ class SavingsAccount(Account):
                 depositAmount = int(input(errorMessage))
                 self.deposit(depositAmount)  
             elif self._currentBalance - amount < self._minimumBalance:
-                errorMessage = '''
+                errorMessage = f'''
                 Can not withdraw more than the minimum balance, try again.\n
+                Overdraft limit: {self.getOverdraftLimit}\n
+                Current balance: {self.getCurrentBalance}\n
+                Withdraw amount: {amount}
                 How much would you like to withdraw?\n
                 '''
                 depositAmount = int(input(errorMessage))
@@ -271,6 +278,11 @@ class ChequingAccount(Account):
         super().__init__(accountNumber, accountHolderName, rateOfInterest, currentBalance)
         self._overdraftLimit = overdraftLimit
     
+    def getOverdraftLimit(self):
+        return self._overdraftLimit
+    def setOverdraftLimit(self, limit):
+        self._overdraftLimit = limit
+    
     def withdraw(self, amount):
         try:
             amount = int(amount)
@@ -285,8 +297,11 @@ class ChequingAccount(Account):
                 depositAmount = int(input(errorMessage))
                 self.deposit(depositAmount)  
             elif self._currentBalance - amount < self._overdraftLimit:
-                errorMessage = '''
+                errorMessage = f'''
                 Cannot withdraw more than the overdraft limit, try again.\n
+                Overdraft limit: {self.getOverdraftLimit}\n
+                Current balance: {self.getCurrentBalance}\n
+                Withdraw amount: {amount}
                 How much would you like to withdraw?\n
                 '''
                 depositAmount = int(input(errorMessage))
