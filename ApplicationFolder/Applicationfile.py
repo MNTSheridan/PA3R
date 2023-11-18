@@ -250,7 +250,7 @@ class SavingsAccount(Account):
             elif self._currentBalance - amount < self._minimumBalance:
                 errorMessage = f'''
                 Can not withdraw more than the minimum balance, try again.\n
-                Overdraft limit: {self.getOverdraftLimit()}\n
+                Overdraft limit: {self.getMinimumBalance()}\n
                 Current balance: {self.getCurrentBalance()}\n
                 Withdraw amount: {amount}
                 How much would you like to withdraw?\n
@@ -299,8 +299,8 @@ class ChequingAccount(Account):
             elif self._currentBalance - amount < self._overdraftLimit:
                 errorMessage = f'''
                 Cannot withdraw more than the overdraft limit, try again.\n
-                Overdraft limit: {self.getOverdraftLimit}\n
-                Current balance: {self.getCurrentBalance}\n
+                Overdraft limit: {self.getOverdraftLimit()}\n
+                Current balance: {self.getCurrentBalance()}\n
                 Withdraw amount: {amount}
                 How much would you like to withdraw?\n
                 '''
