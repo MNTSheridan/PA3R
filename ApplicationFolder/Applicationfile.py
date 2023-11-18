@@ -26,6 +26,7 @@ class Account:
 
     def deposit(self, amount):
         try:
+            amount = int(amount)
             if amount > 0:
                 print(f"${amount} has been added to your account.")
                 self.setCurrentBalance(self.getCurrentBalance() + amount)
@@ -181,6 +182,10 @@ class Application:
         while True:
             menuMessage = f'''
             Banking Account of {account.getAccountHolderName()} Application Account Menu:\n
+            Interest rate: {account.getRateOfInterest()}%\n
+            Current Balance: ${account.getCurrentBalance()}
+
+            
             1. Check Balance:\n
             2. Deposit.\n
             3. Withdraw.\n
