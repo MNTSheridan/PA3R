@@ -244,6 +244,9 @@ class SavingsAccount(Account):
                 errorMessage = '''
                 Value inputted is larger than account balance, try again.\n
                 How much would you like to withdraw?\n
+                Overdraft limit: {self.getMinimumBalance()}\n
+                Current balance: {self.getCurrentBalance()}\n
+                Withdraw amount: {amount}
                 '''
                 withdrawAmount = int(input(errorMessage))
                 self.withdraw(withdrawAmount)  
