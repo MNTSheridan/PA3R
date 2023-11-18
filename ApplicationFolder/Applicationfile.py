@@ -193,8 +193,10 @@ class Application:
             else:
                 pass
     
-    def run(bank):
-        showMainMenu(bank)
+    def run(self):
+        bankName = input("What is your bank?")
+        bank = Bank(bankName)
+        self.showMainMenu(bank)
 
 
 
@@ -288,3 +290,5 @@ class ChequingAccount(Account):
             depositAmount = int(input(errorMessage))
             self.deposit(depositAmount)    
         
+app = Application()
+app.run()
