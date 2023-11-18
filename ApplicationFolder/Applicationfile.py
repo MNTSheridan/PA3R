@@ -1,9 +1,9 @@
 class Account:
-    def __init__(self):
-        self._accountNumber = None
-        self._accountHolderName = None
-        self._rateOfInterest = None
-        self._currentBalance = None
+    def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance):
+        self._accountNumber = accountNumber 
+        self._accountHolderName = accountHolderName
+        self._rateOfInterest = rateOfInterest
+        self._currentBalance = currentBalance
     
     #getters
     def getAccountNumber(self):
@@ -54,6 +54,7 @@ class Account:
 
     def withdraw(self, amount):
         try:
+            amount = int(amount)
             if amount > 0 and amount < self._currentBalance:
                 print(f"${amount} has been withdrawn from your account.")
                 self.setCurrentBalance(self.getCurrentBalance() - amount)
@@ -90,14 +91,60 @@ class Account:
 class Bank:
     def __init__(self, bankName):
         self._bankName = bankName
+        self._accounts = [ChequingAccount(101, "John Smith", 2, 10, -200), 
+                          SavingsAccount(102, "John Smith", 2, 10, 200), 
+                          ChequingAccount(103, "Joe Smith", 2, 10, -200), 
+                                                            ]
     
-    def openAccount():
-        pass
+    def openAccount(self):
+        choiceMessage = '''
+        Which account would you like to have?
+        1. Chequing account.
+        2. Savings account.
+        '''
+        try:
+            accountType = int(input("Which account would you like to have?"))
+        except ValueError:
+            errorMessage = '''
+            Invalid input, to pick choose a number.
+            '''    
+            self.openAccount()
+        newAccount = ChequingAccount(101, "Default Assignment", 2, 0, -200) if accountType == 1 else SavingsAccount(101, "Default Assignment", 2, 0, 200) if accountType == 2 else None
+        
+        name = input("What is your name?")
+        newAccount.setAccountHolderName(name)
+
+        #account has been set up
+        self._accounts.append(newAccount)
+
+
     def searchAccount():
-        pass
+        try:
+            accountID = int(input("What is the account id?"))
+        except ValueError:
+            accountID = int(input("Invalid input, please type in an integer value. What is the account id?"))
+
+        for account in self._accounts():
+            if accountID == account._accountNumber():
+                if isinstance(accountID, ChequingAccount):
+                    accountInfoMessage = f'''
+                    ChequingAccount Found:
+                    Name: {account._accountHolderName()}
+                    '''
+                elif isinstance(accountID, SavingsAccount):
+                    accountInfoMessage = f'''
+                    Savings Account Found:
+                    Name: {account._accountHolderName()}
+
+    '''
+                print(accountInfoMessage)
+                break
+        else:
+            print("Account is not found.")
+        
 
 class Application:
-    def showMainMenu():
+    def showMainMenu(bank):
         while True:
             menuMessage = '''
             Banking Application Menu:\n
@@ -111,15 +158,16 @@ class Application:
                 print("Invalid selection, try again.")
                 choice = int(input(menuMessage))
             if choice == 1:
-                pass
+                bank.searchAccount()
             elif choice == 2:
-                pass
+                bank.openAccount()
             elif choice == 3:
-                pass
+                print("Now closing application.")
+                break
             else:
                 pass
 
-    def showAccountMenu():
+    def showAccountMenu(account):
         while True:
             menuMessage = '''
             Banking Application Account Menu:\n
@@ -134,21 +182,20 @@ class Application:
                 print("Invalid selection, try again.")
                 choice = int(input(menuMessage))
             if choice == 1:
-                pass
+                print(f"Your balance: {account.getCurrentBalance}")
             elif choice == 2:
-                pass
+                account.deposit()
             elif choice == 3:
-                pass
+                account.withdraw()
             elif choice == 4:
                 print("You have chosen to exit the account, thank you for using our banking system.")
                 break
             else:
                 pass
     
-    def run():
-        pass
+    def run(bank):
+        showMainMenu(bank)
 
-    run()
 
 
 class SavingsAccount(Account):
@@ -159,6 +206,7 @@ class SavingsAccount(Account):
 
     def withdraw(self, amount):
         try:
+            amount = int(amount)
             if amount > 0 and amount < self._currentBalance and self._currentBalance - amount > self._minimumBalance:
                 print(f"${amount} has been withdrawn from your account.")
                 self.setCurrentBalance(self.getCurrentBalance() - amount)
@@ -206,6 +254,7 @@ class ChequingAccount(Account):
     
     def withdraw(self, amount):
         try:
+            amount = int(amount)
             if amount > 0 and self._currentBalance - amount > self._overdraftLimit:
                 print(f"${amount} has been withdrawn from your account.")
                 self.setCurrentBalance(self.getCurrentBalance() - amount)
