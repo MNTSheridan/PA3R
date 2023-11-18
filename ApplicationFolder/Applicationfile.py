@@ -238,15 +238,15 @@ class SavingsAccount(Account):
                 Negative value inputted, try again.\n
                 How much would you like to withdraw?\n
                 '''
-                depositAmount = int(input(errorMessage))
-                self.deposit(depositAmount)  
+                withdrawAmount = int(input(errorMessage))
+                self.withdraw(withdrawAmount)  
             elif amount > self._currentBalance:
                 errorMessage = '''
                 Value inputted is larger than account balance, try again.\n
                 How much would you like to withdraw?\n
                 '''
-                depositAmount = int(input(errorMessage))
-                self.deposit(depositAmount)  
+                withdrawAmount = int(input(errorMessage))
+                self.withdraw(withdrawAmount)  
             elif self._currentBalance - amount < self._minimumBalance:
                 errorMessage = f'''
                 Can not withdraw more than the minimum balance, try again.\n
@@ -255,23 +255,23 @@ class SavingsAccount(Account):
                 Withdraw amount: {amount}
                 How much would you like to withdraw?\n
                 '''
-                depositAmount = int(input(errorMessage))
-                self.deposit(depositAmount) 
+                withdrawAmount = int(input(errorMessage))
+                self.withdraw(withdrawAmount) 
             else:
                 errorMessage = '''
                 Invalid value inputted, try again.\n
                 How much would you like to withdraw?\n
                 '''
-                depositAmount = int(input(errorMessage))
-                self.deposit(depositAmount)       
+                withdrawAmount = int(input(errorMessage))
+                self.withdraw(withdrawAmount)       
 
         except ValueError:
             errorMessage = '''
             Invalid value inputted, try again.\n
             How much would you like to withdraw?\n
             '''
-            depositAmount = int(input(errorMessage))
-            self.deposit(depositAmount)     
+            withdrawAmount = int(input(errorMessage))
+            self.withdraw(withdrawAmount)     
 
 class ChequingAccount(Account):
     def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance, overdraftLimit):
