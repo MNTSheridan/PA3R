@@ -24,11 +24,68 @@ class Account:
     def setCurrentBalance(self, currentBalance):
         self._currentBalance = currentBalance
 
-    def deposit():
-        pass
+    def deposit(self, amount):
+        try:
+            if amount > 0:
+                print(f"${amount} has been added to your account.")
+                self.setCurrentBalance(self.getCurrentBalance() + amount)
+            elif amount < 0:
+                errorMessage = '''
+                Negative value inputted, try again.\n
+                How much would you like to deposit?\n
+                '''
+                depositAmount = int(input(errorMessage))
+                self.deposit(depositAmount)    
+            else:
+                errorMessage = '''
+                Invalid value inputted, try again.\n
+                How much would you like to deposit?\n
+                '''
+                depositAmount = int(input(errorMessage))
+                self.deposit(depositAmount)       
 
-    def withdraw():
-        pass
+        except ValueError:
+            errorMessage = '''
+            Invalid value inputted, try again.\n
+            How much would you like to deposit?\n
+            '''
+            depositAmount = int(input(errorMessage))
+            self.deposit(depositAmount)
+
+    def withdraw(self, amount):
+        try:
+            if amount > 0 and amount < self._currentBalance:
+                print(f"${amount} has been withdrawn from your account.")
+                self.setCurrentBalance(self.getCurrentBalance() - amount)
+            elif amount < 0:
+                errorMessage = '''
+                Negative value inputted, try again.\n
+                How much would you like to withdraw?\n
+                '''
+                depositAmount = int(input(errorMessage))
+                self.deposit(depositAmount)  
+            elif amount > self._currentBalance:
+                errorMessage = '''
+                Value inputted is larger than account balance, try again.\n
+                How much would you like to withdraw?\n
+                '''
+                depositAmount = int(input(errorMessage))
+                self.deposit(depositAmount)  
+            else:
+                errorMessage = '''
+                Invalid value inputted, try again.\n
+                How much would you like to withdraw?\n
+                '''
+                depositAmount = int(input(errorMessage))
+                self.deposit(depositAmount)       
+
+        except ValueError:
+            errorMessage = '''
+            Invalid value inputted, try again.\n
+            How much would you like to withdraw?\n
+            '''
+            depositAmount = int(input(errorMessage))
+            self.deposit(depositAmount)        
 
 class Bank:
     def __init__(self, bankName):
@@ -99,8 +156,14 @@ class SavingsAccount(Account):
         super().__init__(accountNumber, accountHolderName, rateOfInterest, currentBalance)
         self._minimumBalance = minimumBalance
 
+    def withdraw():
+        pass
+
 class ChequingAccount(Account):
     def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance, overdraftLimit):
         super().__init__(accountNumber, accountHolderName, rateOfInterest, currentBalance)
         self._overdraftLimit = overdraftLimit
+    
+    def withdraw():
+        pass
         
