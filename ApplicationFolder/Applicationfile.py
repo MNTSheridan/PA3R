@@ -95,7 +95,7 @@ class Bank:
     def __init__(self, bankName):
         self.bankName = bankName
         self.accounts =  accounts = [ChequingAccount(101, "John Smith", 2, 10, -200), 
-                        SavingsAccount(102, "John Smith", 2, 10, 200), 
+                        SavingsAccount(102, "John Smith", 2, 200, 200), 
                         ChequingAccount(103, "Joe Smith", 2, 10, -200)
                                                         ]
     
