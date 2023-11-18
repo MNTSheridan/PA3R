@@ -183,7 +183,6 @@ class Application:
             menuMessage = f'''
             Banking Account of {account.getAccountHolderName()} Application Account Menu:\n
             Interest rate: {account.getRateOfInterest()}%\n
-            Current Balance: ${account.getCurrentBalance()}
 
             
             1. Check Balance:\n
@@ -197,7 +196,7 @@ class Application:
                 print("Invalid selection, try again.")
                 choice = int(input(menuMessage))
             if choice == 1:
-                print(f"Your balance: {account.getCurrentBalance}")
+                print(f"Your balance: {account.getCurrentBalance()}")
             elif choice == 2:
                 amount = input("How much do you want to deposit?\n")
                 account.deposit(amount)
