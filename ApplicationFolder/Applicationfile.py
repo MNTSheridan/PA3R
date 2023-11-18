@@ -64,30 +64,30 @@ class Account:
                 Negative value inputted, try again.\n
                 How much would you like to withdraw?\n
                 '''
-                depositAmount = int(input(errorMessage))
-                self.deposit(depositAmount)  
+                withdrawAmount = int(input(errorMessage))
+                self.withdraw(withdrawAmount)  
             elif amount > self._currentBalance:
                 errorMessage = '''
                 Value inputted is larger than account balance, try again.\n
                 How much would you like to withdraw?\n
                 '''
                 depositAmount = int(input(errorMessage))
-                self.deposit(depositAmount)  
+                self.withdraw(withdrawAmount)  
             else:
                 errorMessage = '''
                 Invalid value inputted, try again.\n
                 How much would you like to withdraw?\n
                 '''
-                depositAmount = int(input(errorMessage))
-                self.deposit(depositAmount)       
+                withdrawAmount = int(input(errorMessage))
+                self.withdraw(withdrawAmount)       
 
         except ValueError:
             errorMessage = '''
             Invalid value inputted, try again.\n
             How much would you like to withdraw?\n
             '''
-            depositAmount = int(input(errorMessage))
-            self.deposit(depositAmount)        
+            withdrawAmount = int(input(errorMessage))
+            self.withdraw(withdrawAmount)        
 
 class Bank:
 
@@ -294,8 +294,8 @@ class ChequingAccount(Account):
                 Negative value inputted, try again.\n
                 How much would you like to withdraw?\n
                 '''
-                depositAmount = int(input(errorMessage))
-                self.deposit(depositAmount)  
+                withdrawAmount = int(input(errorMessage))
+                self.withdraw(withdrawAmount)  
             elif self._currentBalance - amount < self._overdraftLimit:
                 errorMessage = f'''
                 Cannot withdraw more than the overdraft limit, try again.\n
@@ -304,23 +304,23 @@ class ChequingAccount(Account):
                 Withdraw amount: {amount}
                 How much would you like to withdraw?\n
                 '''
-                depositAmount = int(input(errorMessage))
-                self.deposit(depositAmount)  
+                withdrawAmount = int(input(errorMessage))
+                self.withdraw(withdrawAmount)  
             else:
                 errorMessage = '''
                 Invalid value inputted, try again.\n
                 How much would you like to withdraw?\n
                 '''
-                depositAmount = int(input(errorMessage))
-                self.deposit(depositAmount)       
+                withdrawAmount = int(input(errorMessage))
+                self.withdraw(withdrawAmount)       
 
         except ValueError:
             errorMessage = '''
             Invalid value inputted, try again.\n
             How much would you like to withdraw?\n
             '''
-            depositAmount = int(input(errorMessage))
-            self.deposit(depositAmount)    
+            withdrawAmount = int(input(errorMessage))
+            self.withdraw(withdrawAmount)    
         
 app = Application()
 app.run()
