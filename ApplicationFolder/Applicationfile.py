@@ -118,6 +118,7 @@ class Bank:
 
         #account has been set up
         self.accounts.append(newAccount)
+        Application().showAccountMenu(newAccount)
 
 
     def searchAccount(self):
@@ -141,6 +142,7 @@ class Bank:
                     '''
                     print(accountInfoMessage)
                 
+                Application().showAccountMenu(account)
                 break
         else:
             print("Account is not found.")
@@ -172,11 +174,13 @@ class Application:
                 break
             else:
                 pass
+        
+
 
     def showAccountMenu(self, account):
         while True:
-            menuMessage = '''
-            Banking System of  Application Account Menu:\n
+            menuMessage = f'''
+            Banking Account of {account.getAccountHolderName()} Application Account Menu:\n
             1. Check Balance:\n
             2. Deposit.\n
             3. Withdraw.\n
@@ -190,9 +194,11 @@ class Application:
             if choice == 1:
                 print(f"Your balance: {account.getCurrentBalance}")
             elif choice == 2:
-                account.deposit()
+                amount = input("How much do you want to deposit?\n")
+                account.deposit(amount)
             elif choice == 3:
-                account.withdraw()
+                amount = input("How much do you want to withdraw?\n")
+                account.withdraw(amount)
             elif choice == 4:
                 print("You have chosen to exit the account, thank you for using our banking system.")
                 break
@@ -203,7 +209,7 @@ class Application:
         bankName = input("What is your bank?\n")
         bank = Bank(bankName)
         self.showMainMenu(bank)
-        self.showAccountMenu()
+
 
 
 
